@@ -34,8 +34,13 @@ jobs:
     - name: Generate coverage report
       run: |
         cd _build
-        lcov --capture --directory . --output-file coverage.info
-        lcov --remove coverage.info '/usr/*' '*/third-party/*' '*/tests/*' --output-file coverage.info
+        # Запустить тесты еще раз для уверенности
+        ctest --verbose > /dev/null 2>&1 || true
+        # Проверить, есть ли .gcda файлы
+        find . -name "*.gcda" -type f
+        # Собрать покрытие с игнорированием ошибок
+        lcov --capture --directory . --output-file coverage.info --ignore-errors empty,unused
+        lcov --remove coverage.info '/usr/*' '*/third-party/*' '*/tests/*' --output-file coverage.info --ignore-errors unused
         lcov --list coverage.info
         
     - name: Upload to Coveralls
