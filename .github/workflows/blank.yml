@@ -30,6 +30,7 @@ jobs:
     - name: Run tests
       run: |
         cd _build
+        ctest --verbose
         ./check_banking
         
     - name: Generate coverage report
