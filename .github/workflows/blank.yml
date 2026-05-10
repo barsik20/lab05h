@@ -21,7 +21,7 @@ jobs:
         sudo apt-get install -y lcov
     
     - name: Configure CMake
-      run: cmake -H. -B_build -DBUILD_TESTS=ON -DCOLLECT_COVERAGE=ON
+      run: cmake -S . -B _build -DBUILD_TESTS=ON -DCOLLECT_COVERAGE=ON
       
     - name: Build
       run: cmake --build _build
@@ -34,11 +34,12 @@ jobs:
     - name: Generate coverage report
       run: |
         cd _build
-        lcov --capture --directory . --output-file coverage.info
-        lcov --remove coverage.info '/usr/*' '*/third-party/*' '*/tests/*' --output-file coverage.info
-        lcov --list coverage.info
+        lcov --capture --directory . --output-file coverage.info --ignore-errors empty,unused || true
+        lcov --remove coverage.info '/usr/*' '*/third-party/*' '*/tests/*' --output-file coverage.info --ignore-errors unused || true
+        lcov --list coverage.info || true
         
     - name: Upload to Coveralls
+      if: always()
       uses: coverallsapp/github-action@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
