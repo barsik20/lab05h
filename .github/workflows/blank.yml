@@ -34,12 +34,11 @@ jobs:
     - name: Generate coverage report
       run: |
         cd _build
-        lcov --capture --directory . --output-file coverage.info --ignore-errors empty,unused || true
-        lcov --remove coverage.info '/usr/*' '*/third-party/*' '*/tests/*' --output-file coverage.info --ignore-errors unused || true
-        lcov --list coverage.info || true
+        lcov --capture --directory . --output-file coverage.info --ignore-errors unused
+        lcov --remove coverage.info '/usr/*' '*/third-party/*' '*/tests/*' --output-file coverage.info --ignore-errors unused
+        lcov --list coverage.info
         
     - name: Upload to Coveralls
-      if: always()
       uses: coverallsapp/github-action@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
