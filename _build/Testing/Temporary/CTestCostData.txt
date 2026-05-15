@@ -1,4 +1,0 @@
-check_print 1 0.00523081
-check_banking 0 0
----
-check_banking
