@@ -1,3 +1,0 @@
-/root/barsik20/workspace/formatter_ex_lib/_build/CMakeFiles/formatter_ex_lib.dir
-/root/barsik20/workspace/formatter_ex_lib/_build/CMakeFiles/edit_cache.dir
-/root/barsik20/workspace/formatter_ex_lib/_build/CMakeFiles/rebuild_cache.dir

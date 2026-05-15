@@ -1,5 +1,5 @@
 # Build directories
-_build/
+*/_build/
 build/
 cmake-build-*/
 CMakeCache.txt
